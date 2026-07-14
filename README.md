@@ -23,22 +23,19 @@ There are **12 touch-sensitive pads** (numbered 0-11):
 | **10** | **TO Modifier** | Hold to enable tempo control and alternative knob functions |
 | **11** | **CH Modifier** | Hold to enable scale selection |
 
-### Knobs
+### Knobs (clockwise)
+- S30 **Brightness** | Controls filter brightness/cutoff frequency
+- S31 **Pitch** | Global pitch transpose/tuning
+- S32 **Timbre** | Sound structure/harmonic content
+- S33 **Density** | Pattern density/complexity
+- S33 + TO (pad 10) **Pattern Shift**
+- S34 **Notes** | Humanization of note timing/variation
+- S35 **String Chance** | Probability of string triggering
+- S35 + TO (pad 10) **Reverb Mix**
 
-**8 analog control knobs** mapped to pins S30-S37:
-
-| Knob | Pin | Parameter | Description |
-|------|-----|-----------|-------------|
-| **1** | S30 | **Brightness** | Controls filter brightness/cutoff frequency |
-| **2** | S31 | **Pitch** | Global pitch transpose/tuning |
-| **3** | S32 | **Timbre** | Sound structure/harmonic content |
-| **4** | S33 | **Density** / **Pattern Shift** | Default: Pattern density/complexity<br>When TO (pad 10) held: Shift pattern timing |
-| **5** | S34 | **Notes** | Humanization of note timing/variation |
-| **6** | S35 | **String Chance** / **Reverb Mix** | Default: Probability of string triggering<br>When TO (pad 10) held: Reverb wet/dry mix |
-| **7** | S36 | **Drive** | Distortion/overdrive amount (reduces volume as drive increases) |
-| **8** | S37 | **Damp** | String damping/decay time |
-
-> **Note:** Some knobs have dual functions based on modifier pad state (TO/CH)
+### Faders
+- S36 (left) **Drive** | Distortion/overdrive amount (reduces volume as drive increases)
+- S37 (right) **Damp** | String damping/decay time
 
 ### Switches
 
