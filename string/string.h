@@ -43,7 +43,7 @@ public:
 
   void SetArpOn(const bool value) { _is_arp_on = value; }
 
-  bool IsLatched() { return _is_latched; }
+  bool IsLatched() { return _latch.on(); }
   void SetLatch(const bool new_latch);
 
   void NoteOn(const uint8_t note_num);
@@ -127,7 +127,6 @@ private:
   uint8_t _human_string_chance;
   float _volume;
   bool _is_arp_on;
-  bool _is_latched;
 };
 
 };

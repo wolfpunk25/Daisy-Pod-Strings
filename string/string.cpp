@@ -13,8 +13,7 @@ _damping              { 0.f },
 _human_note_chance    { 0 },
 _human_string_chance  { 0 },
 _volume               { 1.f },
-_is_arp_on            { false },
-_is_latched           { false }
+_is_arp_on            { false }
 {
   _note_on.fill(false);
   _note_hold.fill(false);

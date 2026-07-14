@@ -14,6 +14,8 @@ public:
     }
     ~Latch() = default;
 
+    bool on() const { return _on; }
+
     void set_on(const bool on) { 
         auto was_on = _on;
         _on = on;
