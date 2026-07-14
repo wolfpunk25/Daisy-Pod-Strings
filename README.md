@@ -1,12 +1,8 @@
 # TouchString
 Plunk and bang on metal, plastic and wood. Add distortion and modulation
 
-## Project Setup
-```shell
-$ git clone --recurse-submodules https://github.com/Synthux-Academy/TouchString.git
-$ make libs -j8
-$ make clean; make -j8
-```
+## Quick Install
+Download the [binary file](https://github.com/Synthux-Academy/TouchString/releases/latest/download/TouchString.bin) and flash using the [Daisy Seed web programmer](https://electro-smith.github.io/Programmer/)
 
 ## Controls
 
@@ -39,39 +35,35 @@ There are **12 touch-sensitive pads** (numbered 0-11):
 
 ### Switches
 
-**2 three-position switches** for mode selection:
-
-| Switch | Positions | Function |
-|--------|-----------|----------|
-| **A** | **Down**: Off<br>**Center**: Arp On<br>**Up**: Latch | **Arpeggiator Mode**<br>Down: Direct note playing (no arp)<br>Center: Arpeggiator active, notes release when pads released<br>Up: Latching arpeggiator (notes toggle on/off) |
-| **B** | *(Reserved)* | Not currently assigned |
+- **A** (right)
+  - **Down**: Arpeggiator Off
+  - **Center**: Arpeggiator On
+  - **Up**: Arpeggiator Latched
 
 ### LED Indicator
 
-The onboard LED indicates **latch mode status** (lit when latch is active).
-
-## Configuration
-
-Edit `config.h` to customize the instrument:
-
-### Scales
-Three built-in scales with 8 notes each:
-- **Amara**: D3, A3, C4, D4, E4, F4, G4, A4
-- **Oxalis**: F3, A3, Bb3, C4, D4, F4, A4, Bb4
-- **Pigmy**: F3, G3, Ab3, C4, Eb4, F4, G4, Ab4
-
+The onboard LED lit when latch is active.
 
 ## Project Structure
-
 ```
 TouchString/
-├── app.cpp              # Main application entry point
-├── config.h             # Configuration parameters
+├── TouchString.cpp      # Main application entry point
 ├── Makefile             # Build configuration
-├── string/              # String synthesis and arpeggiator logic
-├── touch/               # Touch interface (pads, knobs, switches)
-├── ui/                  # User interface logic
-└── lib/                 # External libraries
+|-- common               # Configuration and utilities
+├── string/              # Instrument core
+├── touch/               # Simple Touch wrapper (pads, knobs, switches)
+├── ui/                  # UI connecting instrument core with touch wrapper
+└── lib/                 # Libraries
     ├── libDaisy/        # Daisy hardware abstraction
     └── DaisySP/         # DSP library
 ```
+
+## Project Setup
+```shell
+$ git clone --recurse-submodules https://github.com/Synthux-Academy/TouchString.git
+$ make libs -j8
+$ make clean; make -j8
+```
+
+## Configuration
+Edit [config.h](https://github.com/Synthux-Academy/TouchString/blob/main/common/config.h) to customize the instrument.
