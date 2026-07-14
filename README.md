@@ -1,23 +1,20 @@
-# TouchString
-Plunk and bang on metal, plastic and wood. Add distortion and modulation
+# This is TouchString
 
 ## Quick Install
 Download the [binary file](https://github.com/Synthux-Academy/TouchString/releases/latest/download/TouchString.bin) and flash using the [Daisy Seed web programmer](https://electro-smith.github.io/Programmer/)
 
 ## Controls
 
-### Touch Pads
+<img src="touch.jpeg" width="300"/>
 
-There are **12 touch-sensitive pads** (numbered 0-11):
-
-| Pad(s) | Function | Notes |
-|--------|----------|-------|
-| **0** | **Tempo Down** / **Previous Scale** | When TO pad (10) is held: Slow down arpeggiator<br>When CH pad (11) is held: Select previous scale |
-| **1** | *empty* | Not currently assigned |
-| **2** | **Tempo Up** / **Next Scale** | When TO pad (10) is held: Speed up arpeggiator<br>When CH pad (11) is held: Select next scale |
-| **3-9** | **Note Pads** (7 notes) | Play notes from the selected scale<br>In arp mode: Add/remove notes from arpeggio<br>In latch mode: Toggle notes on/off |
-| **10** | **TO Modifier** | Hold to enable tempo control and alternative knob functions |
-| **11** | **CH Modifier** | Hold to enable scale selection |
+### Pads
+- P10 + P00 - tempo down
+- P11 + P00 - previous scale
+- P10 + P02 - tempo up
+- P11 + P02 - next scale
+- P03...P09 - note pads
+- P10 - "TO" modifier | Hold to enable tempo control and alternative knob functions
+- P11 - "CH" modifier | Hold to enable scale selection
 
 ### Knobs (clockwise)
 - S30 **Brightness** | Controls filter brightness/cutoff frequency
