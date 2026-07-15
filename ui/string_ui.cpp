@@ -121,10 +121,9 @@ void StringUI::_process_midi() {
                 }
             }
             break;
-            // Note: unlike Bass, the string engine's NoteOn/NoteOff take a
+            // TODO: unlike Bass, the string engine's NoteOn/NoteOff take a
             // scale-degree index (0..7), not a chromatic MIDI note number,
-            // so incoming NoteOn/NoteOff messages aren't forwarded here -
-            // matching the original sketch, which had no MIDI note input at all.
+            // so incoming NoteOn/NoteOff messages aren't forwarded here.
             case ControlChange: {
                 auto ctrl_msg = msg.AsControlChange();
                 auto num = ctrl_msg.control_number;
