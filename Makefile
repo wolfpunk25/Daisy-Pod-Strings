@@ -1,5 +1,5 @@
 # Project Name
-TARGET = TouchString
+TARGET = DaisyPodStrings
 
 # Enabling DEBUG disables USB MIDI
 # DEBUG = 1
@@ -7,7 +7,7 @@ TARGET = TouchString
 USE_DAISYSP_LGPL = 1
 
 # Sources
-CPP_SOURCES = TouchString.cpp $(wildcard touch/*.cpp) $(wildcard string/*.cpp) $(wildcard ui/*.cpp)
+CPP_SOURCES = TouchString.cpp $(wildcard string/*.cpp) ui/mvalue.cpp ui/pod_ui.cpp
 C_INCLUDES = -Ilib/ -Icommon/
 
 # Library Locations

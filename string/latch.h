@@ -8,7 +8,7 @@ namespace synthux {
 template<uint8_t note_count>
 class Latch {
 public:
-    Latch() {
+    Latch(): _on { false } {
         _note_on.reset();
         _note_hold.reset();
     }
