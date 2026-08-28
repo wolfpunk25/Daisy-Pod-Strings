@@ -45,6 +45,22 @@ NOTE_COLORS = (
     (240, 30, 190),
 )
 
+# Large 7-row glyphs. A-H label the eight performance positions; they are not
+# literal pitch names because the active scale is selected independently on the
+# Pod. Rows use the least-significant bit as the leftmost pixel.
+NOTE_GLYPHS = (
+    (0x18, 0x24, 0x42, 0x42, 0x7E, 0x42, 0x42),  # A
+    (0x7C, 0x42, 0x42, 0x7C, 0x42, 0x42, 0x7C),  # B
+    (0x3C, 0x42, 0x40, 0x40, 0x40, 0x42, 0x3C),  # C
+    (0x78, 0x44, 0x42, 0x42, 0x42, 0x44, 0x78),  # D
+    (0x7E, 0x40, 0x40, 0x7C, 0x40, 0x40, 0x7E),  # E
+    (0x7E, 0x40, 0x40, 0x7C, 0x40, 0x40, 0x40),  # F
+    (0x3C, 0x42, 0x40, 0x4E, 0x42, 0x42, 0x3C),  # G
+    (0x42, 0x42, 0x42, 0x7E, 0x42, 0x42, 0x42),  # H
+)
+
+START_GLYPH = (0x3C, 0x42, 0x40, 0x3C, 0x02, 0x42, 0x3C)  # S
+
 i2c = busio.I2C(scl=board.GP1, sda=board.GP0, frequency=400000)
 matrix = Matrix8x8(i2c, address=0x70)
 matrix.auto_write = False
@@ -81,13 +97,15 @@ def all_notes_off():
     send_raw(bytes((0xB0 | MIDI_CHANNEL, 123, 0)))
 
 
-def draw_notes(held):
+def draw_glyph(rows):
+    """Draw an upright glyph on the matrix as mounted in the enclosure."""
     matrix.fill(0)
-    for x in range(8):
-        matrix[x, 7] = 1
-        if held[x]:
-            for y in range(1, 7):
-                matrix[x, y] = 1
+    for y, row in enumerate(rows):
+        for x in range(8):
+            if row & (1 << x):
+                # The matrix PCB is mounted 90 degrees clockwise relative to
+                # the HT16K33 driver's coordinate system.
+                matrix[y, 7 - x] = 1
     matrix.show()
 
 
@@ -103,15 +121,15 @@ def update_pixel(held):
 stable = [not button.value for button in buttons]
 candidate = list(stable)
 changed_at = [time.monotonic()] * len(buttons)
+held_order = [index for index, pressed in enumerate(stable) if pressed]
+last_played = held_order[-1] if held_order else None
 
 all_notes_off()
-draw_notes(stable)
+draw_glyph(NOTE_GLYPHS[last_played] if last_played is not None else START_GLYPH)
 update_pixel(stable)
 
 while True:
     now = time.monotonic()
-    display_changed = False
-
     for index, button in enumerate(buttons):
         raw_pressed = not button.value
         if raw_pressed != candidate[index]:
@@ -122,10 +140,16 @@ while True:
         ):
             stable[index] = candidate[index]
             send_note(index, stable[index])
-            display_changed = True
+            if stable[index]:
+                if index in held_order:
+                    held_order.remove(index)
+                held_order.append(index)
+                last_played = index
+            elif index in held_order:
+                held_order.remove(index)
 
-    if display_changed:
-        draw_notes(stable)
-        update_pixel(stable)
+            displayed = held_order[-1] if held_order else last_played
+            draw_glyph(NOTE_GLYPHS[displayed])
+            update_pixel(stable)
 
     time.sleep(0.002)

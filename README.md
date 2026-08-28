@@ -20,7 +20,8 @@ Build from source only if you want to change the instrument.
 ### MIDI controller
 
 - Buttons 1–8 play all eight notes in the selected scale.
-- The 8×8 display shows button number/order and held notes as vertical bars.
+- The 8×8 display shows a large upright `A`–`H` label for the most recently
+  played performance position. It keeps the last label visible after release.
 - The NeoPixel follows the most recently held note.
 - Note messages are sent simultaneously over USB MIDI and GP4 UART/TRS MIDI.
 - MIDI notes are C4–G4 (`60`–`67`) on channel 1.
@@ -29,6 +30,10 @@ The photographed physical layout is interpreted row-by-row: two buttons on the
 upper row, three on the middle row, and three on the lower row. The actual GPIO
 order is isolated in `controller/code.py` as `BUTTON_PINS`; edit only that tuple
 if a hardware test reveals a different wiring order.
+
+The `A`–`H` labels identify the eight performance positions rather than literal
+chromatic pitches. The Pod owns the active scale and the MIDI connection is
+one-way from the controller to the Pod.
 
 ### Daisy Pod
 
