@@ -103,9 +103,9 @@ def draw_glyph(rows):
     for y, row in enumerate(rows):
         for x in range(8):
             if row & (1 << x):
-                # The matrix PCB is mounted 90 degrees clockwise relative to
-                # the HT16K33 driver's coordinate system.
-                matrix[y, 7 - x] = 1
+                # The matrix PCB is mounted 90 degrees counter-clockwise
+                # relative to the HT16K33 driver's coordinate system.
+                matrix[7 - y, x] = 1
     matrix.show()
 
 
