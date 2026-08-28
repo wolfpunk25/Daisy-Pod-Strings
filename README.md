@@ -20,20 +20,28 @@ Build from source only if you want to change the instrument.
 ### MIDI controller
 
 - Buttons 1–8 play all eight notes in the selected scale.
-- The 8×8 display shows a large upright `A`–`H` label for the most recently
-  played performance position. It keeps the last label visible after release.
+- The onboard user button cycles Amara → Oxalis → Pigmy.
+- The 8×8 display briefly shows scale `1`, `2`, or `3`, then shows the actual
+  pitch name of the most recently played note. A small `b` marks flats.
 - The NeoPixel follows the most recently held note.
+- Scale changes flash the NeoPixel orange, green, or blue respectively.
 - Note messages are sent simultaneously over USB MIDI and GP4 UART/TRS MIDI.
-- MIDI notes are C4–G4 (`60`–`67`) on channel 1.
+- MIDI notes `60`–`67` select scale degrees 1–8 on channel 1.
+
+| Scale | Button pitches |
+| --- | --- |
+| 1 — Amara | C, G, B♭, C, D, E♭, F, G |
+| 2 — Oxalis | C, E, F, G, A, C, E, F |
+| 3 — Pigmy | C, D, E♭, G, B♭, C, D, E♭ |
 
 The photographed physical layout is interpreted row-by-row: two buttons on the
 upper row, three on the middle row, and three on the lower row. The actual GPIO
 order is isolated in `controller/code.py` as `BUTTON_PINS`; edit only that tuple
 if a hardware test reveals a different wiring order.
 
-The `A`–`H` labels identify the eight performance positions rather than literal
-chromatic pitches. The Pod owns the active scale and the MIDI connection is
-one-way from the controller to the Pod.
+The controller sends its selected scale to the Pod before every note, keeping
+the displayed name and audible pitch synchronized even if the Pod's own scale
+button was used in between notes.
 
 ### Daisy Pod
 
@@ -89,6 +97,7 @@ available:
 
 | CC | Parameter |
 | --- | --- |
+| 20 | Scale index (0 Amara, 1 Oxalis, 2 Pigmy) |
 | 70 | Brightness |
 | 71 | Transpose |
 | 72 | Structure |

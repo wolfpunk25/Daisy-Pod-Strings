@@ -143,6 +143,11 @@ void PodUI::ProcessMidi()
                 const float value = Norm(cc.value);
                 switch(cc.control_number)
                 {
+                    case kScaleSelectCc:
+                        _scale_index = cc.value % _string.ScalesCount();
+                        _string.SetScaleIndex(_scale_index);
+                        _scale_flash_frames = kScaleFlashFrames;
+                        break;
                     case 70: _values[Brightness].Set(value); break;
                     case 71: _values[Transpose].Set(value); break;
                     case 72: _values[Structure].Set(value); break;

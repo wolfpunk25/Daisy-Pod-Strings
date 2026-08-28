@@ -59,6 +59,7 @@ class PodUI {
 
     static constexpr uint8_t kMidiChannel = 0;
     static constexpr uint8_t kFirstMidiNote = 60;
+    static constexpr uint8_t kScaleSelectCc = 20;
     static constexpr uint16_t kScaleFlashFrames = 125;
 
     daisy::DaisyPod& _hw;
